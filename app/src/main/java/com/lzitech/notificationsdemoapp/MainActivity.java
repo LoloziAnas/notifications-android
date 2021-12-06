@@ -9,7 +9,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
@@ -24,12 +23,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        findViewById(R.id.notification_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showNotification();
-            }
-        });
+        findViewById(R.id.notification_button).setOnClickListener(v -> showNotification());
 
     }
 
@@ -63,7 +57,22 @@ public class MainActivity extends AppCompatActivity {
         Notification notification = builder.build();
         if (notificationManager != null){
             notificationManager.notify(notificationId, notification);
-
+        }
+    }
+    /**
+     * a function for building a channel for a specific notification
+     * */
+    private void buildNotificationChannel(NotificationManager notificationManager, String channelId){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (notificationManager != null && notificationManager.getNotificationChannel(channelId) == null) {
+                NotificationChannel notificationChannel = new NotificationChannel(
+                        channelId, "Notification channel 1", NotificationManager.IMPORTANCE_HIGH
+                );
+                notificationChannel.setDescription("This notification channel is used to notify app user");
+                notificationChannel.enableVibration(true);
+                notificationChannel.enableLights(true);
+                notificationManager.createNotificationChannel(notificationChannel);
+            }
         }
     }
 }
