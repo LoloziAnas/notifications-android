@@ -3,7 +3,6 @@ package com.lzitech.notificationsdemoapp;
 import android.os.Bundle;
 import android.util.Log;
 
-import androidx.annotation.LongDef;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class NotificationActivity extends AppCompatActivity {
