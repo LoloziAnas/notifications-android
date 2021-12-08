@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         Notification notification = builder.build();
         if (notificationManager != null){
             notificationManager.notify(notificationId, notification);
+
         }
     }
     /**
